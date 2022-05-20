@@ -14,6 +14,18 @@ export class ApiConnectionsService {
     return this.http.get(apiUrl + '/character/?page=' + page);
   }
 
+  getListOfLocations(page: number) {
+    return this.http.get(apiUrl + '/location/?page=' + page);
+  }
+
+  getListOfEpisodes(page: number) {
+    return this.http.get(apiUrl + '/episode/?page=' + page);
+  }
+
+  getSingleCharacter(characterUrl: string) {
+    return this.http.get(characterUrl);
+  }
+
 
 
 }

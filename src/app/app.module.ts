@@ -20,6 +20,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SingleCharacterComponent } from './components/single-character/single-character.component';
+import { SingleLocationComponent } from './components/single-location/single-location.component';
+import { SingleEpisodeComponent } from './components/single-episode/single-episode.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import {ReactiveFormsModule} from '@angular/forms';
     CharactersComponent,
     LocationsComponent,
     EpisodesComponent,
-    NavbarComponent
+    NavbarComponent,
+    SingleCharacterComponent,
+    SingleLocationComponent,
+    SingleEpisodeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,16 +1,18 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ApiConnectionsService} from '../../services/api-connections.service';
-import {SearchCommunicatorService} from '../../services/search-communicator.service';
+import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {saveEvent} from '../../store/log.actions';
+import {ApiConnectionsService} from '../../services/api-connections.service';
+import {SearchCommunicatorService} from '../../services/search-communicator.service';
+import {PortalGunService} from '../../services/portal-gun.service';
 
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.css']
 })
-export class CharactersComponent implements OnInit {
+export class CharactersComponent implements OnInit, OnDestroy {
   log$: Observable<any>;
   characters: any = [];
   filteredCharacters: any = [];
@@ -21,9 +23,12 @@ export class CharactersComponent implements OnInit {
   totalCharacters: number = 0;
 
 
+
   constructor(private api: ApiConnectionsService,
               private store: Store<{ log: any }>,
-              private searchService: SearchCommunicatorService) {
+              private searchService: SearchCommunicatorService,
+              private portalGunService: PortalGunService,
+              private router: Router) {
     this.log$ = store.select('log');
   }
 
@@ -32,9 +37,12 @@ export class CharactersComponent implements OnInit {
       this.term = term;
       this.searchCharacter();
     });
-    this.breakPoints();
     this.detectScroll();
     this.getCharacters();
+  }
+
+  ngOnDestroy() {
+    this.searchService.updateSearchTerm('');
   }
 
   getCharacters() {
@@ -58,7 +66,9 @@ export class CharactersComponent implements OnInit {
   }
 
   searchCharacter() {
-    this.store.dispatch(saveEvent('Searching character: ' + this.term));
+    if(this.term.length>0) {
+      this.store.dispatch(saveEvent('Searching character: ' + this.term));
+    }
     this.characters = this.filteredCharacters
     this.characters = this.characters.filter((character: any) => {
       return character.name.toLowerCase().includes(this.term.toLowerCase());
@@ -78,24 +88,16 @@ export class CharactersComponent implements OnInit {
     }
   }
 
-  breakPoints() {
-    this.store.dispatch(saveEvent('Changing breakpoints...'));
-    switch (true) {
-      case (window.innerWidth <= 480):
-        this.columns = 1;
-        break;
-      case (window.innerWidth > 480 && window.innerWidth <= 640):
-        this.columns = 1;
-        break;
-      case (window.innerWidth > 640 && window.innerWidth <= 992):
-        this.columns = 3;
-        break;
-      default:
-        this.columns = 3;
-    }
+  teleport(character: any) {
+    this.store.dispatch(saveEvent('Going to the page of ' + character.name));
+    this.portalGunService.updateSubjectToTeleport(character);
+    this.router.navigate(['character', this.removeSpacesFromString(character.name.toLowerCase())])
+      .then(() => {
+        this.searchService.updateSearchTerm('');
+      });
   }
 
-  onResize(event: Event) {
-    this.breakPoints();
+  removeSpacesFromString(string: string) {
+    return string.replace(/\s/g, '');
   }
 }

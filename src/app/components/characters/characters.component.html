@@ -1,18 +1,17 @@
-<div class="grid grid-cols-12 m-4">
-  <h2 class="col-span-12 text-xl font-bold text-center">Characters</h2>
-  <mat-grid-list [cols]="columns" (window:resize)="onResize($event)" class="col-span-12" *ngIf="characters">
-    <mat-grid-tile *ngFor="let character of characters" class="m-4">
-      <mat-card class="m-4">
-        <img mat-card-image [src]="character.image" [alt]="character.name">
-        <mat-card-title>{{character.name}}</mat-card-title>
-        <mat-card-subtitle>Start</mat-card-subtitle>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="grid lg:grid-cols-3 m-4 grid-cols-1">
+  <h2 class="lg:col-span-3 text-xl font-bold text-center col-span-1">Characters</h2>
+  <div class="flex justify-center my-4" *ngFor="let character of characters">
+    <div class="rounded-lg shadow-lg bg-white max-w-sm">
+        <img class="rounded-t-lg w-full" [src]="character.image" [alt]="character.name"/>
+      <div class="p-6">
+        <h5 class="text-gray-900 text-xl font-medium mb-2">{{character.name}}</h5>
+        <p class="text-gray-700 text-base mb-4">
+          {{character.name}} is a {{character.species}} and is {{character.status}}
+        </p>
+        <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" (click)="teleport(character)">View Character</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 

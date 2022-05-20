@@ -1,1 +1,15 @@
-<p>locations works!</p>
+<div class="grid lg:grid-cols-3 m-4 grid-cols-1">
+  <h2 class="lg:col-span-3 text-xl font-bold text-center col-span-1">Locations</h2>
+  <div class="flex justify-center my-4" *ngFor="let location of locations">
+    <div class="rounded-lg shadow-lg bg-white max-w-sm">
+      <img class="rounded-t-lg w-full" src="/assets/rick-morty-logo.jpg" [alt]="location.name"/>
+      <div class="p-6">
+        <h5 class="text-gray-900 text-xl font-medium mb-2">{{location.name}}</h5>
+        <p class="text-gray-700 text-base mb-4">
+          {{location.name}} is a Rick and Morty location.
+        </p>
+        <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" (click)="teleport(location)">View Location</button>
+      </div>
+    </div>
+  </div>
+</div>
