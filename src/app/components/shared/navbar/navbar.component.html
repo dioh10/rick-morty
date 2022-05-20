@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1>Rick and Morty</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="''"> Characters </a>
+        <a mat-button [routerLink]="'/locations'"> Locations </a>
+        <a mat-button [routerLink]="'/episodes'"> Episodes </a>
+      </div>
+      <span class="menu-spacer"></span>
+    </mat-toolbar-row>
+  <mat-toolbar-row>
+    <mat-form-field>
+      <input type="text" placeholder="Search this page..." matInput [formControl]="searchInput" />
+    </mat-form-field>
+  </mat-toolbar-row>
+  </mat-toolbar>
+
+

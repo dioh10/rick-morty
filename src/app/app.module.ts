@@ -13,11 +13,21 @@ import {MatIconModule} from '@angular/material/icon';
 import {StoreModule} from '@ngrx/store';
 import {logReducer} from './store/log.reducer';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { LocationsComponent } from './components/locations/locations.component';
+import { EpisodesComponent } from './components/episodes/episodes.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CharactersComponent
+    CharactersComponent,
+    LocationsComponent,
+    EpisodesComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatToolbarModule,
     MatIconModule,
     StoreModule.forRoot({log: logReducer}, {}),
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
