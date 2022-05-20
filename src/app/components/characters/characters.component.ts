@@ -32,7 +32,6 @@ export class CharactersComponent implements OnInit {
       this.term = term;
       this.searchCharacter();
     });
-    this.breakPoints();
     this.detectScroll();
     this.getCharacters();
   }
@@ -78,24 +77,7 @@ export class CharactersComponent implements OnInit {
     }
   }
 
-  breakPoints() {
+  /*onResize(event: Event) {
     this.store.dispatch(saveEvent('Changing breakpoints...'));
-    switch (true) {
-      case (window.innerWidth <= 480):
-        this.columns = 1;
-        break;
-      case (window.innerWidth > 480 && window.innerWidth <= 640):
-        this.columns = 1;
-        break;
-      case (window.innerWidth > 640 && window.innerWidth <= 992):
-        this.columns = 3;
-        break;
-      default:
-        this.columns = 3;
-    }
-  }
-
-  onResize(event: Event) {
-    this.breakPoints();
-  }
+  }*/
 }
