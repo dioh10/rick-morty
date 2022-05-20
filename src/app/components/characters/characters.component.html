@@ -1,13 +1,18 @@
 <div class="grid grid-cols-12 m-4">
   <h2 class="col-span-12 text-xl font-bold text-center">Characters</h2>
 </div>
-<mat-card *ngFor="let character of characters" class="m-4">
-  <img mat-card-image [src]="character.image" alt="Photo of a Shiba Inu" class="w-full">
-  <mat-card-title>{{character.name}}</mat-card-title>
-  <mat-card-subtitle>Start</mat-card-subtitle>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
+<mat-grid-list cols="3" rowHeight="1:1"  >
+  <mat-grid-tile *ngFor="let character of characters">
+    <mat-card class="m-4">
+      <img mat-card-image [src]="character.image" alt="Photo of a Shiba Inu" >
+      <mat-card-title>{{character.name}}</mat-card-title>
+      <mat-card-subtitle>Start</mat-card-subtitle>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
 
